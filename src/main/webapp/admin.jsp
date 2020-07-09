@@ -48,13 +48,10 @@
 </head>
 
 <body id="page-top">
-
   <!-- Page Wrapper -->
   <div id="wrapper">
-
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-login-image-back sidebar sidebar-dark accordion" id="accordionSidebar">
-
+    <ul class="navbar-nav bg-login-image-back -back sidebar sidebar-dark accordion" id="accordionSidebar">
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon rotate-n-15">
@@ -65,9 +62,6 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
-
-      
-
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
@@ -82,38 +76,28 @@
         </div>
       </li>
 
-      
-
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
-
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
-
     </ul>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-
       <!-- Main Content -->
       <div id="content">
-
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
 
-          
-
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
-
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
@@ -134,9 +118,7 @@
                 </a>
               </div>
             </li>
-
           </ul>
-
         </nav>
         <!-- End of Topbar -->
 
@@ -189,6 +171,7 @@
             <input type="button" value="Delete" onclick="delete_user();" class="btn btn-danger btn-user"/>
             <hr>
           </form>
+          
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Information</h6>
@@ -197,7 +180,7 @@
               <div class="table-responsive">
                 <table id="tb_users" class="table table-bordered" width="100%" cellspacing="0">
                   <tr>
-                    <td>#ID</td>
+                    <td>ID</td>
                     <td>Firstname</td>
                     <td>Lastname</td>
                     <td>Username</td>
@@ -221,7 +204,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
+            <span>Copyright &copy; Coffee Bean 2020</span>
           </div>
         </div>
       </footer>
@@ -290,7 +273,6 @@
           var cellQuantity = row.insertCell(8);
           var cellStatus = row.insertCell(9);
 
-
           cellId.appendChild(document.createTextNode(childKey));
           cellFirstname.appendChild(document.createTextNode(childData.firstname));
           cellLastname.appendChild(document.createTextNode(childData.lastname));
@@ -349,42 +331,60 @@
 	  });
   
   function update_user() {
-	  	var uid = document.getElementById('uid').value;
-	  	var firstname = document.getElementById('firstname').value;
-	  	var lastname = document.getElementById('lastname').value;
-	  	var username = document.getElementById('username').value;
-	  	var email = document.getElementById('email').value;
-	  	var address = document.getElementById('address').value;
-	  	var zip = document.getElementById('zip').value;
-	  	var coffeeItem = document.getElementById('coffeeItem').value;
-	  	var qtyItem = document.getElementById('qtyItem').value;
-	  	var status = document.getElementById('status').value;
+	  var uid = document.getElementById('uid').value;
+	  var firstname = document.getElementById('firstname').value;
+	  var lastname = document.getElementById('lastname').value;
+	  var username = document.getElementById('username').value;
+	  var email = document.getElementById('email').value;
+	  var address = document.getElementById('address').value;
+	  var zip = document.getElementById('zip').value;
+	  var coffeeItem = document.getElementById('coffeeItem').value;
+	  var qtyItem = document.getElementById('qtyItem').value;
+	  var status = document.getElementById('status').value;
 	  	
-	  	var data = {
-	  		firstname : firstname,
-	  		lastname : lastname,
-	  		username : username,
-	  		email : email,
-	  		address : address,
-	  		zip : zip,
-	  		coffeeItem : coffeeItem,
-	  		qtyItem : qtyItem,
-	  		status : status
-	  	}
-	  	
-	  	var updates = {};
-	  	updates['/users/' + uid] = data;
-	  	firebase.database().ref().update(updates);
-	  	alert('Data Updated Successfully!');
-	  	reload_page();
+	  var proceedUpd = confirm("Make sure you already select the data in the table\nContinue to proceed data update?");
+	  if (proceedUpd == true) {
+		  //proceed
+		  var data = {
+		  	firstname : firstname,
+		  	lastname : lastname,
+		  	username : username,
+		  	email : email,
+		  	address : address,
+		  	zip : zip,
+		  	coffeeItem : coffeeItem,
+		  	qtyItem : qtyItem,
+		  	status : status
+		  }
+		  var updates = {};
+		  updates['/users/' + uid] = data;
+		  firebase.database().ref().update(updates);
+		  alert('Data Updated Successfully!');
+		  reload_page();
 	  }
-
-  function delete_user() {
-  	var uid = document.getElementById('uid').value;
-  	firebase.database().ref().child('/users/' + uid).remove();
-  	alert('Data Deleted Successfully!');
-  	reload_page();
+	  else {
+	    //don't proceed
+	    alert("There's nothing changed!");
+	    reload_page();
+	  }
   }
+		  	
+  function delete_user() {
+	  var proceedDel = confirm("Make sure you already select the data in the table\nContinue to proceed data deletion?");
+	  if (proceedDel == true) {
+		//proceed
+		  var uid = document.getElementById('uid').value;
+		  firebase.database().ref().child('/users/' + uid).remove();
+		  alert('Data Deleted Successfully!');
+		  reload_page();
+	  }
+	  else {
+		//don't proceed
+		alert("There's nothing changed!");
+		reload_page();
+	  }
+  }
+  
   function reload_page() {
   	window.location.reload();
   }

@@ -13,14 +13,13 @@ validationApp.controller('mainController', function ($scope) {
 	        const coffeeItem = document.getElementById('coffeeItem');
 	        const qtyItem = document.getElementById('qtyItem');
 	        const zip = document.getElementById('zip');
-	        const addbtn = document.getElementById('addbtn');
+	        const addBtn = document.getElementById('addBtn');
 	
 	        const database = firebase.database();
 	        const usersRef = database.ref('users/');
-	        
 	
 	        // Add Data
-	        addbtn.addEventListener('click', e => {
+	        addBtn.addEventListener('click', e => {
 	            e.preventDefault();
 	            const uid = usersRef.push().key
 	            usersRef.child(uid).set({

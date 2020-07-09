@@ -11,32 +11,32 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <title>Checkout Form | Coffee Bean</title>
     
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
-<!-- TODO: Add SDKs for Firebase products that you want to use
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+	<!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script>
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "api_key",
-    authDomain: "auth_domain",
-    databaseURL: "databaseURL",
-    projectId: "projectId",
-    storageBucket: "storageBucket",
-    messagingSenderId: "messagingSenderId",
-    appId: "appId",
-    measurementId: "measurementId"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-</script>
-    <title>Checkout Form | Coffee Bean</title>
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+		apiKey: "api_key",
+		authDomain: "auth_domain",
+		databaseURL: "databaseURL",
+		projectId: "projectId",
+		storageBucket: "storageBucket",
+		messagingSenderId: "messagingSenderId",
+		appId: "appId",
+		measurementId: "measurementId"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	  firebase.analytics();
+	</script>
 </head>
 
 <body class="bg-light" ng-app="validationApp" ng-controller="mainController">
@@ -179,10 +179,10 @@
 
                     <div class="row">
                         <div class="col-md-4 mb-3"
-                            ng-class="{ 'has-error' : userForm.coffee.$invalid && !userForm.coffee.$pristine }">
+                            ng-class="{ 'has-error' : userForm.coffeeItem.$invalid && !userForm.coffeeItem.$pristine }">
                             <label>Coffee</label>
                             <select class="custom-select d-block w-100" name="coffeeItem" id="coffeeItem"
-                                ng-model="user.coffee" required>
+                                ng-model="user.coffeeItem" required>
                                 <option value="" selected>--</option>
                                 <option value="Gayo">Gayo</option>
                                 <option value="Luwak">Luwak</option>
@@ -193,7 +193,7 @@
                                 <option value="Lanang">Lanang</option>
                                 <option value="Wamena">Wamena</option>
                                 <option value="Sidikalang">Sidikalang</option>
-                                <p ng-show="userForm.coffee.$invalid && !userForm.coffee.$pristine" class="help-block">
+                                <p ng-show="userForm.coffeeItem.$invalid && !userForm.coffeeItem.$pristine" class="help-block">
                                     Enter a
                                     valid coffee.</p>
                             </select>
@@ -202,13 +202,13 @@
                         <div class="col-md-4 mb-3"
                             ng-class="{ 'has-error' : userForm.qty.$invalid && !userForm.qty.$pristine }">
                             <label for="qty">Quantity</label>
-                            <select class="custom-select d-block w-100" name="qtyItem" id="qtyItem" ng-model="user.qty"
+                            <select class="custom-select d-block w-100" name="qtyItem" id="qtyItem" ng-model="user.qtyItem"
                                 required>
                                 <option value="" selected>--</option>
                                 <option value="1">1 kg</option>
                                 <option value="2">2 kg</option>
                                 <option value="3">3 kg</option>
-                                <p ng-show="userForm.qty.$invalid && !userForm.qty.$pristine" class="help-block">Enter a
+                                <p ng-show="userForm.qtyItem.$invalid && !userForm.qtyItem.$pristine" class="help-block">Enter a
                                     valid quantity.</p>
                             </select>
                         </div>
@@ -216,7 +216,7 @@
                         <div class="col-md-3 mb-3"
                             ng-class="{ 'has-error' : userForm.zip.$invalid && !userForm.zip.$pristine }">
                             <label for="zip">Zip code</label>
-                            <input type="text" class="form-control" id="zip" ng-model="user.zip" ng-pattern="/^[0-9]*$/" 
+                            <input type="number" class="form-control" id="zip" ng-model="user.zip" ng-pattern="/^[0-9]*$/" 
                             ng-minlength="5" ng-maxlength="5" placeholder="ex: 10229"
                                 required>
                             <p ng-show="userForm.zip.$invalid && !userForm.zip.$pristine" class="help-block">Enter a
@@ -226,7 +226,7 @@
 
                     <hr class="mb-3">
                     <button class="btn btn-primary btn-lg btn-block bg-primary" type="submit" 
-                    id="addbtn" onclick="calculatePrice()">Continue to
+                    id="addBtn" onclick="calculatePrice()">Continue to
                         Order</button>
                 </form>
             </div>
@@ -246,8 +246,7 @@
             </ul>
         </div>
     </footer>
-
-
+    
 
     <!-- Bootstrap core JavaScript
 ================================================== -->
